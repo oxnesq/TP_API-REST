@@ -100,12 +100,12 @@
                 .then(response => {
                     // On vérifie le code de retour de la requête
                     switch (response.status) {
-                        case 201: // Created: ça s'est bien passé
+                        case 200: // Created: ça s'est bien passé
                             // On recharge la liste des catégories
                             chargeCategories();
                             break;
-                        case 409: // Conflict: 
-                            afficheMessage("");
+                        case 409: // Conflict:
+                            afficheMessage("impossible de supprimer une categorie");
                             break;
                     }
                 })
@@ -137,11 +137,11 @@
         <h2>Liste des catégories ({{_embedded.categories.length}} / {{page.totalElements}})</h2>
         <TABLE>
         {{! Un commentaire Mustache }}
-        <TR><TH>Code</TH><TH>Libelle</TH><TH>Action</TH></TR>
+        <TR><TH>Code</TH><TH>Libelle</TH><TH>description</TH><TH>Action</TH></TR>
         {{! Pour chaque categorie dans le tableau 'categories' }}
         {{#_embedded.categories}}
         {{! Une ligne dans la table }}
-        <TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD><button type="button" id="supprimerButton" value={{code}} onclick="supprimerCategorie('{{_links.self.href}})'>Supprimer</button></TD></TR>
+        <TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD><TD><button type="button" id="supprimerButton" value={{code}} onclick="supprimerCategorie('{{_links.self.href}}')">Supprimer</button></TD></TR>
         {{/_embedded.categories}}
         </TABLE>
     </script>
